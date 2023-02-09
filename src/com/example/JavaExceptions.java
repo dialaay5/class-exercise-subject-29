@@ -3,12 +3,28 @@ package com.example;
 import java.util.Scanner;
 
 public class JavaExceptions {
+
+    private static String _name;
+    private static String _desiredJob;
     static int fullstackSalary = 22000;
     static int backendSalary = 20000;
     static int frontendSalary = 18000;
 
-    public static void checkJopTitle(String jopTitle){
-        switch (jopTitle){
+    public static String getName() {
+        return _name;
+    }
+    public static String getDesiredJob() {
+        return _desiredJob;
+    }
+    public static void setName(String name) {
+        _name = name;
+    }
+    public static void setDesiredJob(String desiredJob) {
+        _desiredJob = desiredJob;
+    }
+
+    public static void checkJopTitle(){
+        switch (_desiredJob){
             case "fullstack":
                 System.out.println("the salary of Fullstack jop is : " + fullstackSalary + "$");
                 break;
@@ -24,25 +40,15 @@ public class JavaExceptions {
     }
 
     public static void salaryCalculator(){
-        Scanner s = new Scanner(System.in);
-        System.out.println("Please enter your name:");
-        String name = s.next();
-        System.out.println("Please enter your  job title:");
-        String jopTitle = s.next();
-        try {
-            if (jopTitle.equals("fullstack")) {
-                System.out.printf("Hello %s with the job title %s you will earn in 5 years: " + (frontendSalary * 12 * 5) + "$", name, jopTitle);
-            } else if (jopTitle.equals("backend")) {
-                System.out.printf("Hello %s with the job title %s you will earn in 5 years: " + (backendSalary * 12 * 5) + "$", name, jopTitle);
-            } else if (jopTitle.equals("frontend")) {
-                System.out.printf("Hello %s with the job title %s you will earn in 5 years: " + (frontendSalary * 12 * 5) + "$", name, jopTitle);
-            }
-            else{
-                throw new IllegalArgumentException();
-            }
+        if (_desiredJob.equals("fullstack")) {
+            System.out.printf("Hello %s with the job title %s you will earn in 5 years: " + (frontendSalary * 12 * 5) + "$", _name, _desiredJob);
+        } else if (_desiredJob.equals("backend")) {
+            System.out.printf("Hello %s with the job title %s you will earn in 5 years: " + (backendSalary * 12 * 5) + "$", _name, _desiredJob);
+        } else if (_desiredJob.equals("frontend")) {
+            System.out.printf("Hello %s with the job title %s you will earn in 5 years: " + (frontendSalary * 12 * 5) + "$", _name, _desiredJob);
         }
-        catch (IllegalArgumentException e){
-            System.out.printf(e + "\nHello %s, the job title you provide %s is unknown to us, so we can’t calculate your salary in 5 years"  ,name ,jopTitle);
+        else{
+            throw new IllegalArgumentException();
         }
     }
 }
